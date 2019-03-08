@@ -9,20 +9,9 @@ module.exports = server => {
   server.post('/api/login', login);
   server.get('/api/jokes', authenticate, getJokes);
 };
-
-
 const secret= process.env.JWT_SECRET|| 'Thus is a test';
-/*
-function generateToken(user) {
-  const payload = {
-    username: user.username
-  };
-  const options = {
-    expiresIn: '1d'
-  }
-  return jwt.sign(payload, secret.jwtKey, options);
-}
-*/
+
+
 function register(req, res) {
   // implement user registration
   let user = req.body;
@@ -37,6 +26,17 @@ function register(req, res) {
       res.status(500).json(err)
     })
 }
+function generateToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username
+  };
+  const options = {
+    expiresIn: '1d'
+  }
+  return jwt.sign(payload, secret, options);
+}
+
 
 function login(req, res) {
   // implement user login
