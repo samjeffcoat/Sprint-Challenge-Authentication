@@ -1,4 +1,3 @@
-require('dotenv').config();
 
 const jwt = require('jsonwebtoken');
 
@@ -20,13 +19,10 @@ function authenticate(req, res, next) {
       console.log(token)
       console.log(jwtKey)
       console.log(req.decoded)
-      if (err) {
-         res.status(401).json(err);
-        }
-        else{
+      if (err) return  res.status(401).json(err);
+        
       req.decoded = decoded;
       next();
-    }
     });
   } else {
     return res.status(401).json({
