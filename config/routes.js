@@ -1,13 +1,17 @@
 const axios = require('axios');
 const bcrypt= require('bcryptjs');
-const db = require('../database/dbConfig');
+const Users = require('../models/user-model');
 const { authenticate } = require('../auth/authenticate');
 
+const jwt= require('jsonwebtoken');
 module.exports = server => {
   server.post('/api/register', register);
   server.post('/api/login', login);
   server.get('/api/jokes', authenticate, getJokes);
 };
+
+
+const secret= process.env.JWT_SECRET|| 'Thus is a test';
 /*
 function generateToken(user) {
   const payload = {
@@ -25,7 +29,7 @@ function register(req, res) {
   const hash = bcrypt.hashSync(user.password, 10)
   user.password = hash;
 
-  db('users').insert(user)
+  Users.add(user)
     .then(saved => {
       res.status(201).json(saved);
     })
