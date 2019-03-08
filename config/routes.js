@@ -1,9 +1,9 @@
 const axios = require('axios');
-const { authenticate } = require('../auth/authenticate');
+const { authenticate, generateToken } = require('../auth/authenticate');
 const Users = require('../models/user-model');
 
 
-const jwt= require('jsonwebtoken');
+//const jwt= require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 
@@ -14,7 +14,7 @@ module.exports = server => {
   server.post('/api/login', login);
   server.get('/api/jokes', authenticate, getJokes);
 };
-const secret= process.env.JWT_SECRET|| 'Thus is a test';
+//const secret= process.env.JWT_SECRET|| 'Thus is a test';
 //had wriong syntax
 
 function register(req, res) {
@@ -31,17 +31,6 @@ function register(req, res) {
       res.status(500).json(err)
     })
 }
-function generateToken(user) {
-  const payload = {
-    subject: user.id,
-    username: user.username,
-  };
-  const options = {
-    expiresIn: '1d'
-  }
-  return jwt.sign(payload, secret, options);
-}
-
 
 function login(req, res) {
   // implement user login
