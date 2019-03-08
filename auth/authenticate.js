@@ -27,3 +27,12 @@ function authenticate(req, res, next) {
     });
   }
 }
+function generateToken(user) {
+  const payload = {
+    username: user.username
+  };
+  const options = {
+    expiresIn: '1h'
+  }
+  return jwt.sign(payload, secret, options);
+}
