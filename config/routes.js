@@ -26,6 +26,16 @@ function register(req, res) {
   })
 }
 
+function generateToken(user){
+  const payload= {
+    username: user.username
+  };
+  const options ={
+    expiresIn: '1h'
+  }
+  return jwt.sign(payload, secret, options);
+}
+
 function login(req, res) {
   // implement user login
 }
