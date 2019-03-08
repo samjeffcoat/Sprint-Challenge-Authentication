@@ -10,7 +10,7 @@ module.exports = server => {
   server.get('/api/jokes', authenticate, getJokes);
 };
 const secret= process.env.JWT_SECRET|| 'Thus is a test';
-
+//had wriong syntax
 
 function register(req, res) {
   // implement user registration
