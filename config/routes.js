@@ -1,6 +1,6 @@
 const axios = require('axios');
 const bcrypt= require('bcryptjs');
-const db = require('../database/auth.db3')
+const db = require('../database/dbConfig');
 const { authenticate, generateToken } = require('../auth/authenticate');
 
 module.exports = server => {
