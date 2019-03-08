@@ -1,14 +1,24 @@
 const axios = require('axios');
 const bcrypt= require('bcryptjs');
 const db = require('../database/dbConfig');
-const { authenticate, generateToken } = require('../auth/authenticate');
+const { authenticate } = require('../auth/authenticate');
 
 module.exports = server => {
   server.post('/api/register', register);
   server.post('/api/login', login);
   server.get('/api/jokes', authenticate, getJokes);
 };
-
+/*
+function generateToken(user) {
+  const payload = {
+    username: user.username
+  };
+  const options = {
+    expiresIn: '1d'
+  }
+  return jwt.sign(payload, secret.jwtKey, options);
+}
+*/
 function register(req, res) {
   // implement user registration
   let user = req.body;
@@ -27,7 +37,7 @@ function register(req, res) {
 function login(req, res) {
   // implement user login
   let {username, password} = req.body;
-  db('users').findBy({username})
+  db('users').find({username})
   .first()
   .then(user => {
     if(user && bcrypt.compareSync(password, user.password)){
