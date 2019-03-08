@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const Users = require('../model/usersModel');
 const jwt = require('jsonwebtoken')
 
+const secret =process.env.JWT_SECRET || 'add a third table for many to many relationships';
 const { authenticate } = require('../auth/authenticate');
 
 module.exports = server => {

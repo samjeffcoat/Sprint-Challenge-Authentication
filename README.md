@@ -71,7 +71,7 @@ Helpful Tip on Testing this Project:
 ## Minimum Viable Product
 
 - [x ] Implement the `register` function inside `/config/routes.js`.
-- [ ] Implement the `login` function inside `/config/routes.js`.
+- [x ] Implement the `login` function inside `/config/routes.js`.
 - [x ] Use JSON Web Tokens for authentication.
 
 **Note** The migrations and a database with empty users is already included
