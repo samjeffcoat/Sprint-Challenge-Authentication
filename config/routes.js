@@ -29,7 +29,7 @@ function register(req, res) {
 function generateToken(user) {
   const payload = {
     subject: user.id,
-    username: user.username
+    username: user.username,
   };
   const options = {
     expiresIn: '1d'
@@ -46,7 +46,7 @@ function login(req, res) {
   .then(user => {
     console.log(user.password)
     if(user && bcrypt.compareSync(password, user.password)){
-      const token = tokenService.generateToken(user);
+      const token = generateToken(user);
       res.status(200).json({
         message: `Welcome ${user.username}!, have a token!`,
         token,
